@@ -1,8 +1,7 @@
 name: device_media
 description: A new Flutter package project.
 version: 0.0.2
-homepage: https://tech.fighttech.vn
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+homepage: https://github.com/FightTech-VN/device-media
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
