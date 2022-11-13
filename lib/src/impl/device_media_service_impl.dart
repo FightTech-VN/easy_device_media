@@ -104,6 +104,19 @@ class DeviceMediaServiceImpl extends DeviceMediaService {
 
     return image?.path;
   }
+
+  @override
+  Future<String?> openPickVideo() async {
+    // Pick an image
+    final imgPath = await ImagePicker().pickVideo(
+      source: ImageSource.gallery,
+    );
+
+    if (imgPath == null) {
+      return null;
+    }
+    return imgPath.path;
+  }
 }
 
 extension DeviceMediaExt on DeviceMediaSource {

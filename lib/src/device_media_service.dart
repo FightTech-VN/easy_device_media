@@ -6,6 +6,8 @@ abstract class DeviceMediaService {
     bool isCameraFront = false,
     bool needCompress = false,
   });
+
+  Future<String?> openPickVideo();
 }
 
 enum DeviceMediaSource {
