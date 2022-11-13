@@ -1,6 +1,6 @@
 name: device_media
 description: Easy Image Picker 
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/FightTech-VN/device-media
 
 environment:
