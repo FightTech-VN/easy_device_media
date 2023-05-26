@@ -99,7 +99,7 @@ class DeviceMediaServiceImpl extends DeviceMediaService {
       quality: quality,
     );
     if (image != null) {
-      log(image.lengthSync().toString());
+      log(image.length().toString());
     }
 
     return image?.path;

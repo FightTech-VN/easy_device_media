@@ -1,3 +1,7 @@
+## 0.0.6
+
+Build `flutter 3.10`
+
 ## 0.0.5
 
 + Add pick video

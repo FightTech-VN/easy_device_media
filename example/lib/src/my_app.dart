@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
               onPressed: () {
                 DeviceMediaServiceImpl()
-                    .openPickImage(DeviceMediaSource.gallery)
+                    .openPickImage(DeviceMediaSource.gallery, needCrop: true)
                     .then(
                   (value) {
                     if (value?.isNotEmpty ?? false) {
