@@ -5,6 +5,8 @@ abstract class DeviceMediaService {
     CropType cropType = CropType.circle,
     bool isCameraFront = false,
     bool needCompress = false,
+    int? maxWidth,
+    int? maxHeight,
   });
 
   Future<String?> openPickVideo();

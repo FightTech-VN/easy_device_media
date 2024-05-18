@@ -15,6 +15,8 @@ class DeviceMediaServiceImpl extends DeviceMediaService {
     CropType cropType = CropType.circle,
     bool isCameraFront = false,
     bool needCompress = false,
+    int? maxWidth = 1000,
+    int? maxHeight = 1200,
   }) async {
     // Pick an image
     final imgPath = await ImagePicker().pickImage(
@@ -35,16 +37,16 @@ class DeviceMediaServiceImpl extends DeviceMediaService {
     }
 
     final pathCrop =
-        needCrop == false ? pathCompress : await _crop(pathCompress, cropType);
+        needCrop == false ? pathCompress : await _crop(pathCompress, cropType, maxWidth, maxHeight);
 
     return pathCrop;
   }
 
-  Future<String?> _crop(String path, CropType type) async {
+  Future<String?> _crop(String path, CropType type, int? maxW, int? maxH) async {
     final image = await ImageCropper().cropImage(
       sourcePath: path,
-      maxHeight: 1200,
-      maxWidth: 1000,
+      maxWidth: maxW,
+      maxHeight: maxH,
       cropStyle:
           type == CropType.circle ? CropStyle.circle : CropStyle.rectangle,
       uiSettings: [
