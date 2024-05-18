@@ -80,6 +80,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                 );
               },
+              child: const Text('Pick Image(Crop)'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                DeviceMediaServiceImpl()
+                    .openPickImage(DeviceMediaSource.gallery)
+                    .then(
+                  (value) {
+                    if (value?.isNotEmpty ?? false) {
+                      setState(() {
+                        _path = value!;
+                      });
+                    }
+                  },
+                );
+              },
               child: const Text('Pick Image'),
             ),
             const SizedBox(height: 10),
@@ -97,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('Pick Video'),
             ),
+            
             const SizedBox(height: 10),
           ],
         ),
