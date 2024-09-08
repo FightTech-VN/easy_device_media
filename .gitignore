@@ -29,3 +29,4 @@
 build/
 /.flutter-plugins-dependencies
 example/macos/Flutter/GeneratedPluginRegistrant.swift
+.flutter-plugins

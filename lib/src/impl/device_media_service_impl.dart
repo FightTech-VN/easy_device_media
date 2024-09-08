@@ -12,7 +12,9 @@ class DeviceMediaServiceImpl extends DeviceMediaService {
   Future<String?> openPickImage(
     DeviceMediaSource source, {
     bool needCrop = false,
-    CropType cropType = CropType.circle,
+    CropType? cropType = CropType.circle,
+    double? ratioX,
+    double? ratioY,
     bool isCameraFront = false,
     bool needCompress = false,
     int? maxWidth = 1000,
@@ -36,19 +38,33 @@ class DeviceMediaServiceImpl extends DeviceMediaService {
       throw Exception('Cannot compress file');
     }
 
-    final pathCrop =
-        needCrop == false ? pathCompress : await _crop(pathCompress, cropType, maxWidth, maxHeight);
+    final pathCrop = needCrop == false
+        ? pathCompress
+        : await _crop(
+            pathCompress,
+            cropType,
+            maxWidth,
+            maxHeight,
+            ratioX,
+            ratioY,
+          );
 
     return pathCrop;
   }
 
-  Future<String?> _crop(String path, CropType type, int? maxW, int? maxH) async {
+  Future<String?> _crop(String path, CropType? type, int? maxW, int? maxH,
+      double? ratioX, double? ratioY) async {
+    CropAspectRatio aspectRatio = type == CropType.circle
+        ? CropAspectRatio(ratioX: 1, ratioY: 1)
+        : CropAspectRatio(ratioX: 16, ratioY: 9);
+
     final image = await ImageCropper().cropImage(
       sourcePath: path,
       maxWidth: maxW,
       maxHeight: maxH,
-      cropStyle:
-          type == CropType.circle ? CropStyle.circle : CropStyle.rectangle,
+      aspectRatio: type == null
+          ? CropAspectRatio(ratioX: ratioX!, ratioY: ratioY!)
+          : aspectRatio,
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Edit Image',
@@ -61,6 +77,12 @@ class DeviceMediaServiceImpl extends DeviceMediaService {
           lockAspectRatio: false,
           showCropGrid: false,
           // activeControlsWidgetColor: AppColors.primaryColor,
+          // aspectRatioPresets: [
+          //   CropAspectRatioPreset.original,
+          //   CropAspectRatioPreset.square,
+          //   CropAspectRatioPreset.ratio16x9,
+          //   CropAspectRatioPreset.ratio4x3,
+          // ],
         ),
         IOSUiSettings(
           minimumAspectRatio: 1.0,
