@@ -1,3 +1,7 @@
+## 1.0.1
++ Upgrade `image_cropper: ^8.0.2` 
++ Build flutter 3.24.1
+
 ## 1.0.0
 
 Support Build `flutter 3.13` xcode 15
